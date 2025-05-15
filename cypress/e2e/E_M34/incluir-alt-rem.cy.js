@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe('Teste para a Candidatura', () => {
+describe('Teste para Agenda de contato', () => {
     beforeEach(() => {
         cy.visit('https://agenda-contatos-react.vercel.app/')
     })
@@ -22,10 +22,20 @@ describe('Teste para a Candidatura', () => {
         cy.get('input[type="email"]').type('fricklukas96novo@gmail.com')
         cy.get('input[type="tel"]').clear()
         cy.get('input[type="tel"]').type('11958244081')
+        cy.screenshot('incluindo-contato-alteracao')
         cy.get('.alterar').click()
+    })
+
+    it('Deve cancelar a alteraçao dos dados do contato adicionado', () => {
+        cy.get(':nth-child(4) > .sc-gueYoa > .edit').click()
+        cy.get('input[type="text"]').clear()
+        cy.get('input[type="text"]').type('Lukas C. Frick')
+        cy.get('.cancelar').click()
     })
 
     it('Deve deletar os dados do contato adicionado', () => {
         cy.get(':nth-child(4) > .sc-gueYoa > .delete').click()
-    }) 
+        cy.screenshot('removendo-contato')
+
+    })
 })
